@@ -1,4 +1,4 @@
-import { conflictError } from "../errors/errors.js";
+import { conflictError, notFoundError } from "../errors/errors.js";
 import customersRepository from "../repositories/customersRepository.js";
 
 
@@ -11,5 +11,11 @@ export const createCustomersService = async ({name, phone, cpf}) => {
 
 export const listCustomers = () => {
   const result = customersRepository.getAll();
+  return result
+}
+
+export const searchCustomerById = async ({id}) => {
+  const result = await customersRepository.getById(id);
+  if (result.rowCount === 0) throw notFoundError('cliente','id')
   return result
 }

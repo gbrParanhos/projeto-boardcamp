@@ -20,10 +20,18 @@ const getAll = () => {
   `)
 }
 
+const getById = (id) => {
+  return db.query(`
+    SELECT * FROM customers
+      WHERE id = $1;
+  `, [id])
+}
+
 const customersRepository = {
   create,
   getByCPF,
-  getAll
+  getAll,
+  getById
 }
 
 export default customersRepository
