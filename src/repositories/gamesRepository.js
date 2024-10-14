@@ -14,6 +14,13 @@ const getByName = (name) => {
   `, [name])
 }
 
+const getById = (id) => {
+  return db.query(`
+    SELECT * FROM games
+      WHERE id = $1;
+  `, [id])
+}
+
 const getAll = () => {
   return db.query(`
     SELECT * FROM games;
@@ -23,6 +30,7 @@ const getAll = () => {
 const gamesRepository = {
   create,
   getByName,
+  getById,
   getAll
 }
 
