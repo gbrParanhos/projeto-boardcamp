@@ -33,8 +33,8 @@ const getById = (id) => {
 const getCurrentRentals = (gameId) => {
   return db.query(`
     SELECT games."stockTotal", COUNT(rentals.id) AS "rentalsTotal" FROM games
-	    LEFT JOIN rentals ON games.id = rentals."gameId"
-	    WHERE rentals."returnDate" IS null AND games.id = $1
+	    LEFT JOIN rentals ON games.id = rentals."gameId" AND rentals."returnDate" IS null
+	    WHERE games.id = $1
 	    GROUP BY games.id
   `, [gameId])
 }
